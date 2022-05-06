@@ -1,0 +1,88 @@
+/*
+ * @Author: fg
+ * @Date: 2022-05-05 15:40:34
+ * @LastEditors: fg
+ * @LastEditTime: 2022-05-06 11:40:49
+ * @Description: input css
+ */
+
+.container{
+  width: 100%;
+  height: 100%;
+  background-image: url("../images/pages/bg.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  color: var(--fColor);
+}
+
+.container h1{
+  font-size: .8rem;
+  padding-top: 2rem;
+  padding-bottom: .4rem;
+  padding-left: .9rem;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+.container p{
+  font-size: .32rem;
+  padding-left: .9rem;
+  padding-bottom: 1.6rem;
+  box-sizing: border-box;
+}
+.container .inputBox{
+  width: 100%;
+  height: .68rem;
+  padding: 0 0.9rem;
+  box-sizing: border-box;
+  margin-bottom: 1.6rem;
+}
+.inputBox .inputContainer{
+  width: 100%;
+  height: 100%;
+  padding: .1rem 0;
+  box-sizing: border-box;
+  border-bottom: 0.02rem solid var(--input-line);
+}
+.inputContainer img{
+  width: .36rem;
+  height: .36rem;
+  margin-right: .2rem;
+  flex-shrink: 0;
+}
+.inputContainer input{
+  border: none;
+  width: 100%;
+  height: 100%;
+  font-size: .28rem;
+  background: transparent;
+  color: var(--fColor);
+  -webkit-appearance:none;
+  -moz-appearance: none;
+}
+.inputContainer input::-webkit-input-placeholder {
+  /* placeholder颜色  */
+  color: var(--input-placeholder-color);
+}
+/* 获取焦点 */
+.inputContainer input:focus {
+  outline: none;
+  background: transparent;
+}
+.bottomBtn{
+  width: 100%;
+  height: 1.1rem;
+  padding: 0 .9rem;
+  box-sizing: border-box;
+}
+.bottomBtn .btn{
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-size: .32rem;
+  text-align: center;
+  line-height: 1.1rem;
+  background-color: var(--fColor);
+  color: var(--fAction);
+  font-weight: 500;
+  border-radius: .55rem;
+}
