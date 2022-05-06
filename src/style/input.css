@@ -2,10 +2,13 @@
  * @Author: fg
  * @Date: 2022-05-05 15:40:34
  * @LastEditors: fg
- * @LastEditTime: 2022-05-06 17:08:25
+ * @LastEditTime: 2022-05-06 17:49:54
  * @Description: input css
  */
-
+body{
+  width: 100vw;
+  height: 100vh;
+}
 .container{
   width: 100vw;
   height: 100vh;
@@ -13,7 +16,12 @@
   background-size: 100%;
   background-repeat: no-repeat;
   color: var(--fColor);
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
 }
 .containerIframe{
   position: absolute;
@@ -31,7 +39,8 @@
 }
 .container p{
   font-size: .32rem;
-  padding-left: .9rem;
+  transform: scale(.9);
+  padding-left: .7rem;
   padding-bottom: 1.6rem;
   box-sizing: border-box;
 }
@@ -59,7 +68,7 @@
   border: none;
   width: 100%;
   height: 100%;
-  font-size: .28rem;
+  font-size: .32rem;
   background: transparent;
   color: var(--fColor);
   -webkit-appearance:none;

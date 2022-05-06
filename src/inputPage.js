@@ -3,7 +3,7 @@
  * @Author: fg
  * @Date: 2022-05-06 13:39:52
  * @LastEditors: fg
- * @LastEditTime: 2022-05-06 17:04:31
+ * @LastEditTime: 2022-05-06 17:43:18
  * @Description: InputPage
  */
 import Config from '../public/config'
@@ -11,8 +11,23 @@ const InputPage = {
   init () {
     const that = this
     document.getElementById('confirmBtn').onclick = this.handleBtnTap
+
     $('#Input').bind('input propertychange', function (event) {
       that.data.inputValue = $(this).val()
+    })
+    $('#Input').on('focusout', function () {
+      const ua = window.navigator.userAgent
+      if (ua.indexOf('iPhone') > 0 || ua.indexOf('iPad') > 0) { // 键盘收起页面空白问题
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+      }
+    })
+    $('#Input').on('focusout', function () {
+      const ua = window.navigator.userAgent
+      if (ua.indexOf('iPhone') > 0 || ua.indexOf('iPad') > 0) { // 键盘收起页面空白问题
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+      }
     })
   },
   data: {
