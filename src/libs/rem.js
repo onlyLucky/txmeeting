@@ -2,31 +2,32 @@
  * @Author: fg
  * @Date: 2022-05-05 14:58:49
  * @LastEditors: fg
- * @LastEditTime: 2022-05-05 15:29:19
+ * @LastEditTime: 2022-05-06 14:10:37
  * @Description: rem 适配添加
  */
 (function () {
-  var currClientWidth, fontValue, originWidth;
-  originWidth = 750; //ui设计稿的宽度，一般750或640
-  __resize();
+  let currClientWidth, fontValue, originWidth
+  // eslint-disable-next-line prefer-const
+  originWidth = 750 // ui设计稿的宽度，一般750或640
+  __resize()
 
-  window.addEventListener("resize", __resize, false);
+  window.addEventListener('resize', __resize, false)
 
-  function __resize() {
-    currClientWidth = document.documentElement.clientWidth;
+  function __resize () {
+    currClientWidth = document.documentElement.clientWidth
     if (currClientWidth > 768) {
-      currClientWidth = 768;
+      currClientWidth = 768
     }
     if (currClientWidth < 320) {
-      currClientWidth = 320;
+      currClientWidth = 320
     }
-    fontValue = ((625 * currClientWidth) / originWidth).toFixed(2);
-    document.documentElement.style.fontSize = fontValue + "%";
+    fontValue = ((625 * currClientWidth) / originWidth).toFixed(2)
+    document.documentElement.style.fontSize = fontValue + '%'
   }
-})();
+})()
 
 // 计算方式
-/* 
+/*
 假设当前的分辨率为375，设计稿的分辨率750
 两者之间的比例为 750/375 = 0.5
 
