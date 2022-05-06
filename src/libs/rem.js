@@ -2,10 +2,10 @@
  * @Author: fg
  * @Date: 2022-05-05 14:58:49
  * @LastEditors: fg
- * @LastEditTime: 2022-05-06 14:10:37
+ * @LastEditTime: 2022-05-06 15:29:47
  * @Description: rem 适配添加
  */
-(function () {
+function resizeRem () {
   let currClientWidth, fontValue, originWidth
   // eslint-disable-next-line prefer-const
   originWidth = 750 // ui设计稿的宽度，一般750或640
@@ -24,7 +24,9 @@
     fontValue = ((625 * currClientWidth) / originWidth).toFixed(2)
     document.documentElement.style.fontSize = fontValue + '%'
   }
-})()
+}
+
+export default resizeRem
 
 // 计算方式
 /*
