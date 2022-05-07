@@ -2,7 +2,7 @@
  * @Author: fg
  * @Date: 2022-05-06 10:00:16
  * @LastEditors: fg
- * @LastEditTime: 2022-05-06 11:44:12
+ * @LastEditTime: 2022-05-07 16:34:12
  * @Description: webpack 配置
  */
 const path = require('path')
@@ -12,7 +12,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
-  mode: 'none',
+  mode: 'development',
   entry: './src/main.js',
   output: {
     filename: 'bundle.js',
@@ -32,6 +32,10 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           'css-loader'
         ]
+        /* options: {
+          // 当前的css所在的文件相对于打包后的根路径dist的相对路径
+          publicPath: '../img'
+        } */
       },
       {
         test: /\.js$/,
@@ -44,22 +48,29 @@ module.exports = {
             ]
           }
         }
-      }
-      /* {
+      },
+      {
         test: /\.(jpg|png|gif)/,
-        loader: 'url-loader',
-        options: {
-          // 图片大小小于8kb，就会被base64处理，优点：减少请求数量（减轻服务器压力），缺点：图片体积会更大（文件请求速度更慢）
-          // base64在客户端本地解码所以会减少服务器压力，如果图片过大还采用base64编码会导致cpu调用率上升，网页加载时变卡
-          limit: 8000,
-          // 给图片重命名，[hash:10]：取图片的hash的前10位，[ext]：取文件原来扩展名
-          name: '[hash:10].[ext]',
-          // 问题：因为url-loader默认使用es6模块化解析，而html-loader引入图片是conmonjs，解析时会出问题：[object Module]
-          // 解决：关闭url-loader的es6模块化，使用commonjs解析
-          esModule: false,
-          outputPath: 'img'
-        }
-      } */
+
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              // 图片大小小于8kb，就会被base64处理，优点：减少请求数量（减轻服务器压力），缺点：图片体积会更大（文件请求速度更慢）
+              // base64在客户端本地解码所以会减少服务器压力，如果图片过大还采用base64编码会导致cpu调用率上升，网页加载时变卡
+              limit: 8000,
+              // 给图片重命名，[hash:10]：取图片的hash的前10位，[ext]：取文件原来扩展名
+              name: '[hash:10].[ext]',
+              // 问题：因为url-loader默认使用es6模块化解析，而html-loader引入图片是conmonjs，解析时会出问题：[object Module]
+              // 解决：关闭url-loader的es6模块化，使用commonjs解析
+              esModule: false,
+              outputPath: 'img'
+            }
+          }
+        ],
+        type: 'javascript/auto'
+
+      }
     ]
   },
   plugins: [
