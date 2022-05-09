@@ -3,15 +3,19 @@
  * @Author: fg
  * @Date: 2022-05-06 13:39:52
  * @LastEditors: fg
- * @LastEditTime: 2022-05-09 11:25:47
+ * @LastEditTime: 2022-05-09 14:15:23
  * @Description: InputPage
  */
+import { getUrlParam } from './libs/utools'
 import Config from '../public/config'
 const InputPage = {
   init () {
     const that = this
     document.getElementById('confirmBtn').onclick = this.handleBtnTap
-    
+    // fetch('./public/pages/index.html').then(res => {
+    //   console.log(res, 123)
+    // })
+    console.log(getUrlParam('mac'))
     $('#Input').bind('input propertychange', function (event) {
       that.data.inputValue = $(this).val()
     })
@@ -36,12 +40,20 @@ const InputPage = {
   },
   handleBtnTap () {
     if (InputPage.data.inputValue) {
-      InputPage.getUrl()
+      let url = ''
+      if (getUrlParam('mac')) {
+        url = `/bindPad?userName=${this.data.inputValue}&mac=${getUrlParam('mac')}`
+      }
+      if (getUrlParam('meetingId')) {
+        url = `/joinMeeting?userName=${this.data.inputValue}&meetingId=${Number(getUrlParam('meetingId'))}`
+      }
+      if (url) {
+        InputPage.getUrl({ url })
+      }
     }
   },
-  getUrl () {
-    const url = `${Config.apiUrl}/notifyMembership?userName=${this.data.inputValue}`
-    console.log(url)
+  postMeet (httpConfig) {
+    const url = `${Config.apiUrl}${httpConfig.url}`
     $.ajax({
       type: 'post',
       url,
