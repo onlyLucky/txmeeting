@@ -3,7 +3,7 @@
  * @Author: fg
  * @Date: 2022-05-06 13:39:52
  * @LastEditors: fg
- * @LastEditTime: 2022-05-06 17:43:18
+ * @LastEditTime: 2022-05-09 11:25:47
  * @Description: InputPage
  */
 import Config from '../public/config'
@@ -11,7 +11,7 @@ const InputPage = {
   init () {
     const that = this
     document.getElementById('confirmBtn').onclick = this.handleBtnTap
-
+    
     $('#Input').bind('input propertychange', function (event) {
       that.data.inputValue = $(this).val()
     })
