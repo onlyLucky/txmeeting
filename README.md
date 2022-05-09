@@ -10,12 +10,38 @@
 
 ## 简介
 
+- 依赖安装
+
+```shell
+npm i
+```
+
+- 运行
+
+```shell
+npm run dev
+```
+
+- 打包
+
+```shell
+npm run build
+```
+
+### 技术栈
+
+- 编程语言：javascript+jquery
+- 构建工具：webpack
+- 代码规范：eslint+standard
+- node 版本：v12.18.3
+- npm 版本：v6.14.6
+
 ## 开发需求
 
 技术痛点：
 
 - 项目架构搭建费时，需要一个模板脚手架（个人 or 团队）
-- git commit 多人协作提交规范有待完善
+- 版本 commit 多人协作提交规范有待完善
 - 打包构建运行脚手架配置繁琐（同上上一条）
 - 开发环境下，样式预处理的使用，typescript 没有那么遍历
 - 开发规范性问题（代码风格，变量风格，eslint 可解决）
@@ -28,7 +54,7 @@
 
 TODO
 
-- [ ] git commit 提交规范添加
+- [x] git commit 提交规范添加
 - [x] SemVer 版本语义化添加
 - [ ] 打包运行工具区别，现有的文档了解（样式预处理，ts 编译）
 - [ ] 搭建个人脚手架项目添加，项目模板添加
