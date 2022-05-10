@@ -3,7 +3,7 @@
  * @Author: fg
  * @Date: 2022-05-06 13:39:52
  * @LastEditors: fg
- * @LastEditTime: 2022-05-10 14:30:41
+ * @LastEditTime: 2022-05-10 14:40:57
  * @Description: InputPage
  */
 import { getUrlParam } from './libs/utools'
@@ -53,10 +53,11 @@ const InputPage = {
   data: {
     showInput: true,
     inputValue: '',
-    isBind: false
+    isBind: false,
+    isLoading: false
   },
   handleBtnTap () {
-    if (InputPage.data.inputValue) {
+    if (InputPage.data.inputValue && !InputPage.data.isLoading) {
       let url = ''
       if (getUrlParam('mac')) {
         url = `/bindPad?userName=${InputPage.data.inputValue}&mac=${getUrlParam('mac')}`
@@ -71,11 +72,13 @@ const InputPage = {
   },
 
   postMeet (httpConfig) {
+    this.data.isLoading = true
     const url = `${Config.apiUrl}${httpConfig.url}`
     $.ajax({
       type: 'post',
       url,
       success: (res) => { // 【成功回调】
+        this.data.isLoading = false
         if (res.code === 0) {
           if (res.msg) {
             if (this.data.isBind) {
@@ -97,6 +100,7 @@ const InputPage = {
         }
       },
       error: function (xhr, type) { // 【失败回调】
+        this.data.isLoading = false
         const txt = this.data.isBind ? '会议绑定失败' : '加入会议失败'
         this.showMsg(txt)
         console.log(xhr, type, 'baocuo')
