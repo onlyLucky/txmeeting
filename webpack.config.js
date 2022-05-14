@@ -2,7 +2,7 @@
  * @Author: fg
  * @Date: 2022-05-06 10:00:16
  * @LastEditors: fg
- * @LastEditTime: 2022-05-07 16:34:12
+ * @LastEditTime: 2022-05-12 15:07:37
  * @Description: webpack 配置
  */
 const path = require('path')
