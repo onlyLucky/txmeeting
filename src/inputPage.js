@@ -3,7 +3,7 @@
  * @Author: fg
  * @Date: 2022-05-06 13:39:52
  * @LastEditors: fg
- * @LastEditTime: 2022-05-10 14:40:57
+ * @LastEditTime: 2022-05-23 13:39:57
  * @Description: InputPage
  */
 import { getUrlParam } from './libs/utools'
@@ -80,19 +80,21 @@ const InputPage = {
       success: (res) => { // 【成功回调】
         this.data.isLoading = false
         if (res.code === 0) {
-          if (res.msg) {
-            if (this.data.isBind) {
-              window.localStorage.setItem('username', res.msg)
-              this.showMsg('会议绑定成功')
-              $('.result span').text(res.msg)
-              $('.inputBox').hide()
-              $('.bottomBtn').hide()
-              $('.result').show()
-            } else {
-              window.location.href = res.msg
-            }
+          if (this.data.isBind) {
+            window.localStorage.setItem('username', res.data.userCode)
+            this.showMsg('会议绑定成功')
+            $('.result').eq(1).find('span').text(res.data.nickname)
+            $('.result').eq(2).find('span').text(res.data.userCode)
+            // $('.result span').text(res.msg)
+            $('.inputBox').hide()
+            $('.bottomBtn').hide()
+            $('.result').show()
           } else {
-            this.showMsg('当前暂无会议')
+            if (res.msg) {
+              window.location.href = res.msg
+            } else {
+              this.showMsg('当前暂无会议')
+            }
           }
         } else {
           const txt = this.data.isBind ? '会议绑定失败' : '加入会议失败'
