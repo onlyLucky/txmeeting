@@ -3,7 +3,7 @@
  * @Author: fg
  * @Date: 2022-05-06 13:39:52
  * @LastEditors: fg
- * @LastEditTime: 2022-05-23 13:39:57
+ * @LastEditTime: 2022-05-25 17:18:49
  * @Description: InputPage
  */
 import { getUrlParam } from './libs/utools'
@@ -15,10 +15,15 @@ const InputPage = {
     // fetch('./public/pages/index.html').then(res => {
     //   console.log(res, 123)
     // })
-    console.log(getUrlParam('mac'))
+    if (getUrlParam('hasPassword') === '1') {
+      $('.inputBox .inputContainer').eq(1).css({ display: 'flex' })
+    }
     $('.result').hide()
     $('#Input').bind('input propertychange', function (event) {
       that.data.inputValue = $(this).val()
+    })
+    $('#InputPassword').bind('input propertychange', function (event) {
+      that.data.inputPassword = $(this).val()
     })
     $('#Input').on('focusout', function () {
       const ua = window.navigator.userAgent
@@ -32,7 +37,8 @@ const InputPage = {
     } else {
       that.data.isBind = false
     }
-    $('#Input').on('focusout', function () {
+
+    $('#InputPassword').on('focusout', function () {
       const ua = window.navigator.userAgent
       if (ua.indexOf('iPhone') > 0 || ua.indexOf('iPad') > 0) { // 键盘收起页面空白问题
         document.body.scrollTop = 0
@@ -54,7 +60,8 @@ const InputPage = {
     showInput: true,
     inputValue: '',
     isBind: false,
-    isLoading: false
+    isLoading: false,
+    inputPassword: ''
   },
   handleBtnTap () {
     if (InputPage.data.inputValue && !InputPage.data.isLoading) {
@@ -63,7 +70,14 @@ const InputPage = {
         url = `/bindPad?userName=${InputPage.data.inputValue}&mac=${getUrlParam('mac')}`
       }
       if (getUrlParam('meetingId')) {
-        url = `/joinMeeting?userName=${InputPage.data.inputValue}&meetingId=${Number(getUrlParam('meetingId'))}`
+        if (getUrlParam('hasPassword') === '1' && InputPage.data.inputPassword === '') {
+          this.showMsg('请填写密码')
+          return false
+        }
+        url = `/joinMeeting?
+        userName=${InputPage.data.inputValue}&
+        meetingId=${Number(getUrlParam('meetingId'))}
+        ${getUrlParam('hasPassword') === '1' && InputPage.data.inputPassword === '' ? '&password=' + InputPage.data.inputPassword : ''}`
       }
       if (url) {
         InputPage.postMeet({ url })

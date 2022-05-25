@@ -2,7 +2,7 @@
  * @Author: fg
  * @Date: 2022-05-05 15:40:34
  * @LastEditors: fg
- * @LastEditTime: 2022-05-23 13:35:12
+ * @LastEditTime: 2022-05-25 17:00:59
  * @Description: input css
  */
 body {
@@ -49,7 +49,7 @@ body {
 }
 .container .inputBox {
   width: 100%;
-  height: 0.68rem;
+  height: auto;
   padding: 0 0.9rem;
   box-sizing: border-box;
   margin-bottom: 1.6rem;
@@ -60,6 +60,10 @@ body {
   padding: 0.1rem 0;
   box-sizing: border-box;
   border-bottom: 0.02rem solid var(--input-line);
+  margin-bottom: 0.2rem;
+}
+.inputBox .inputContainer:nth-child(2){
+  display: none;
 }
 .inputContainer img {
   width: 0.36rem;
