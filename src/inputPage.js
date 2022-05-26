@@ -3,7 +3,7 @@
  * @Author: fg
  * @Date: 2022-05-06 13:39:52
  * @LastEditors: fg
- * @LastEditTime: 2022-05-25 17:18:49
+ * @LastEditTime: 2022-05-26 13:34:32
  * @Description: InputPage
  */
 import { getUrlParam } from './libs/utools'
@@ -70,14 +70,13 @@ const InputPage = {
         url = `/bindPad?userName=${InputPage.data.inputValue}&mac=${getUrlParam('mac')}`
       }
       if (getUrlParam('meetingId')) {
+        console.log(InputPage.data.inputPassword)
         if (getUrlParam('hasPassword') === '1' && InputPage.data.inputPassword === '') {
           this.showMsg('请填写密码')
           return false
         }
         url = `/joinMeeting?
-        userName=${InputPage.data.inputValue}&
-        meetingId=${Number(getUrlParam('meetingId'))}
-        ${getUrlParam('hasPassword') === '1' && InputPage.data.inputPassword === '' ? '&password=' + InputPage.data.inputPassword : ''}`
+        userName=${InputPage.data.inputValue}&meetingId=${Number(getUrlParam('meetingId'))}${getUrlParam('hasPassword') === '1' && InputPage.data.inputPassword === '' ? '' : '&password=' + InputPage.data.inputPassword}`
       }
       if (url) {
         InputPage.postMeet({ url })
