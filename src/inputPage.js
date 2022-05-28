@@ -3,7 +3,7 @@
  * @Author: fg
  * @Date: 2022-05-06 13:39:52
  * @LastEditors: fg
- * @LastEditTime: 2022-05-26 13:34:32
+ * @LastEditTime: 2022-05-28 11:32:49
  * @Description: InputPage
  */
 import { getUrlParam } from './libs/utools'
@@ -46,13 +46,17 @@ const InputPage = {
       }
     })
     if (window.localStorage.getItem('username')) {
+      this.data.inputValue = window.localStorage.getItem('username')
+      $('#Input').val(window.localStorage.getItem('username'))
       if (getUrlParam('meetingId')) {
-        this.postMeet({
-          url: `/joinMeeting?userName=${window.localStorage.getItem('username')}&meetingId=${Number(getUrlParam('meetingId'))}`
-        })
-      } else {
-        this.data.inputValue = window.localStorage.getItem('username')
-        $('#Input').val(window.localStorage.getItem('username'))
+        if (getUrlParam('meetingId')) {
+          if (getUrlParam('hasPassword') === '1') {
+            return false
+          }
+          this.postMeet({
+            url: `/joinMeeting?userName=${window.localStorage.getItem('username')}&meetingId=${Number(getUrlParam('meetingId'))}`
+          })
+        }
       }
     }
   },
@@ -85,6 +89,10 @@ const InputPage = {
   },
 
   postMeet (httpConfig) {
+    if (getUrlParam('hasPassword') === '1' && this.data.inputPassword === '') {
+      this.showMsg('请填写密码')
+      return false
+    }
     this.data.isLoading = true
     const url = `${Config.apiUrl}${httpConfig.url}`
     $.ajax({
