@@ -2,7 +2,7 @@
  * @Author: fg
  * @Date: 2022-05-06 10:00:16
  * @LastEditors: fg
- * @LastEditTime: 2022-05-12 15:07:37
+ * @LastEditTime: 2022-07-05 16:12:21
  * @Description: webpack 配置
  */
 const path = require('path')
@@ -15,10 +15,10 @@ module.exports = {
   mode: 'development',
   entry: './src/main.js',
   output: {
-    filename: 'bundle.js',
+    filename: 'static/js/bundle.js',
     path: path.join(__dirname, 'dist')
   },
-  devtool: 'source-map',
+  // devtool: 'source-map',
   module: {
     rules: [
       {
@@ -46,6 +46,7 @@ module.exports = {
             presets: [
               ['@babel/preset-env']
             ]
+
           }
         }
       },
@@ -64,7 +65,7 @@ module.exports = {
               // 问题：因为url-loader默认使用es6模块化解析，而html-loader引入图片是conmonjs，解析时会出问题：[object Module]
               // 解决：关闭url-loader的es6模块化，使用commonjs解析
               esModule: false,
-              outputPath: 'img'
+              outputPath: 'static/img'
             }
           }
         ],
@@ -78,7 +79,7 @@ module.exports = {
     // HMR特性所需要插件
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css'
+      filename: 'static/css/[name].css'
       // 输出的css文件名不变的意思
     }),
     new HtmlWebpackPlugin({
